@@ -25,6 +25,9 @@ equalButton.addEventListener('click', () => {calculate();})
 const clearButton = document.querySelector('#button-clear');
 clearButton.addEventListener('click', () => {clear();})
 
+const deleteButton = document.querySelector('#button-delete');
+deleteButton.addEventListener('click', () => {deleteChar();})
+
 function isNumeric(str) {
   if (typeof str != "string") return false  
   return !isNaN(str) && !isNaN(parseFloat(str)) 
@@ -63,6 +66,10 @@ function clear() {
   num2 = 0;
   operator = "";
   result = 0;
+}
+
+function deleteChar() {
+  calculatorDisplay.textContent = calculatorDisplay.textContent.slice(0,calculatorDisplay.textContent.length - 1);
 }
 
 function add(num1, num2) {
