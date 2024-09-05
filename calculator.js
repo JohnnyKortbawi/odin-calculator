@@ -69,7 +69,12 @@ function clear() {
 }
 
 function deleteChar() {
-  calculatorDisplay.textContent = calculatorDisplay.textContent.slice(0,calculatorDisplay.textContent.length - 1);
+  if (calculatorDisplay.textContent === zeroDivisionMessage){
+    clear();
+  }
+  else {
+    calculatorDisplay.textContent = calculatorDisplay.textContent.slice(0,calculatorDisplay.textContent.length - 1);
+  }
 }
 
 function add(num1, num2) {
