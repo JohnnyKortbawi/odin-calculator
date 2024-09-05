@@ -1,5 +1,10 @@
+String.prototype.replaceAt = function(index, replacement) {
+  return this.substring(0, index) + replacement + this.substring(index + replacement.length);
+}
 
 let num1, num2 ,operator, result;
+let operators = ['+','-','*','/'];
+let zeroDivisionMessage = 'why?';
 
 const calculatorDisplay = document.querySelector('#calculator-display');
 clear();
@@ -21,13 +26,18 @@ const clearButton = document.querySelector('#button-clear');
 clearButton.addEventListener('click', () => {clear();})
 
 function isNumeric(str) {
-  if (typeof str != "string") return false // we only process strings!  
-  return !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
-         !isNaN(parseFloat(str)) // ...and ensure strings of whitespace fail
+  if (typeof str != "string") return false  
+  return !isNaN(str) && !isNaN(parseFloat(str)) 
 }
 
 function displayNumber(numericCharacter) {
-  calculatorDisplay.textContent += numericCharacter;
+  if(calculatorDisplay.textContent === zeroDivisionMessage) {
+    clear();
+    calculatorDisplay.textContent += numericCharacter;
+  }
+  else {
+    calculatorDisplay.textContent += numericCharacter;
+  }
 }
 
 function displayOperator(operator) {
@@ -35,9 +45,15 @@ function displayOperator(operator) {
     if(calculatorDisplay.textContent)
     calculatorDisplay.textContent += ` ${operator} `;
   }
-  else if(calculatorDisplay.textContent) {
+  else if(calculatorDisplay.textContent && isNumeric(calculatorDisplay.textContent.charAt(calculatorDisplay.textContent.length - 1))) {
     calculate();
     calculatorDisplay.textContent += ` ${operator} `;
+  }
+  else if (operators.includes(calculatorDisplay.textContent.charAt(calculatorDisplay.textContent.length - 2))) {
+    calculatorDisplay.textContent = calculatorDisplay.textContent.replaceAt(calculatorDisplay.textContent.length - 2, operator);
+  }
+  else if (calculatorDisplay.textContent === zeroDivisionMessage){
+    clear();
   }
 }
 
@@ -96,6 +112,18 @@ function calculate() {
   num1 = parseInt(expressions[0]);
   num2 = parseInt(expressions[2]);
   operator = expressions[1];
-  result = operate(num1, num2, operator);
-  calculatorDisplay.textContent = result;
+  
+  if(operator === '/' && num2 === 0) {
+    calculatorDisplay.textContent = zeroDivisionMessage;
+    return;
+  }
+
+  if(num1 && num2 && operator) {
+    result = operate(num1, num2, operator);
+    calculatorDisplay.textContent = parseFloat(result).toPrecision(5) / 1;
+  }
+  else {
+    calculatorDisplay.textContent = num1;
+  }
+
 }
