@@ -1,15 +1,44 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+button {
+  font-size: 18px;
+  font-weight: bold;
+}
+
 body {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  font-family: 'Roboto';
 }
 
 #calculator-buttons-container {
   display: flex;
+  background-color: darkgrey;
+  padding: 8px
 }
 
 #calculator-numeric-buttons, #calculator-operator-buttons {
   display: flex;
   flex-direction: column;
+}
+
+button {
+  width: 75px;
+  height: 75px;
+}
+
+#calculator-display {
+  font-size: 32px;
+  font-weight: bold;
+  padding: 8px 16px;
+  background-color: lightgray;
+  height: 64px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
