@@ -144,8 +144,8 @@ function operate(num1, num2, operator) {
 
 function calculate() {
   let expressions = calculatorDisplay.textContent.split(' ');
-  num1 = parseInt(expressions[0]);
-  num2 = parseInt(expressions[2]);
+  num1 = parseFloat(expressions[0]);
+  num2 = parseFloat(expressions[2]);
   operator = expressions[1];
   
   if(operator === '/' && num2 === 0) {
