@@ -8,3 +8,8 @@ body {
 #calculator-buttons-container {
   display: flex;
 }
+
+#calculator-numeric-buttons, #calculator-operator-buttons {
+  display: flex;
+  flex-direction: column;
+}
