@@ -19,6 +19,9 @@ operatorButtons.forEach((operatorButton) => {
     operatorButton.addEventListener('click', () => displayOperator(event.target.innerHTML));
 });
 
+const decimalButton = document.querySelector('#button-decimal')
+decimalButton.addEventListener('click', () => {displayDecimal();})
+
 const equalButton = document.querySelector('#button-equal');
 equalButton.addEventListener('click', () => {calculate();})
 
@@ -58,6 +61,26 @@ function displayOperator(operator) {
   else if (calculatorDisplay.textContent === zeroDivisionMessage){
     clear();
   }
+}
+
+function displayDecimal() {
+  if(calculatorDisplay.textContent 
+    && isNumeric(calculatorDisplay.textContent.charAt(calculatorDisplay.textContent.length - 1)) 
+    && !hasDecimal(calculatorDisplay.textContent, calculatorDisplay.textContent.length - 1)) {
+    calculatorDisplay.textContent += '.';
+  }
+}
+
+function hasDecimal (text, index) {
+  for (let i = index; i>0; i--) {
+    if(text[i] == ' ') {
+      return false;
+    }
+    if (text[i] === '.') {
+      return true;
+    }
+  }
+  return false;
 }
 
 function clear() {
