@@ -19,17 +19,15 @@ body {
 #calculator-buttons-container {
   display: flex;
   background-color: darkgrey;
-  padding: 8px
-}
-
-#calculator-numeric-buttons, #calculator-operator-buttons {
-  display: flex;
-  flex-direction: column;
+  padding: 0px 8px 8px 8px;
+  font-size: 0px;
 }
 
 button {
   width: 75px;
   height: 75px;
+  margin: 2px;
+  border-radius: 8px;
 }
 
 #calculator-display {
