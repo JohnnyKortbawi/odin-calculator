@@ -3,11 +3,27 @@ String.prototype.replaceAt = function(index, replacement) {
 }
 
 let num1, num2 ,operator, result;
+let numbers = ['1','2','3','4','5','6','7','8','9','0']
 let operators = ['+','-','*','/'];
 let zeroDivisionMessage = 'why?';
 
 const calculatorDisplay = document.querySelector('#calculator-display');
 clear();
+
+document.addEventListener('keydown', event => {
+  if (numbers.includes(event.key)) {
+    displayNumber(event.key);
+  }
+  if(operators.includes(event.key)) {
+    displayOperator(event.key);
+  }
+  if(event.key == '=' || event.key == 'Enter') {
+    calculate();
+  }
+  if (event.key == 'Backspace' || event.key == 'Delete') {
+    deleteChar();
+  }
+})
 
 const numericButtons = document.querySelectorAll('.numeric-button');
 numericButtons.forEach((numericButton) => {
@@ -160,5 +176,4 @@ function calculate() {
   else {
     calculatorDisplay.textContent = num1;
   }
-
 }
